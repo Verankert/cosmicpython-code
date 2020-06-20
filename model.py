@@ -1,30 +1,42 @@
+from typing import List,Set
+from dataclasses import dataclass
+class Sku():
+    def __init__(self):
+        self.reference_id=None
+@dataclass(frozen=True)
+class OrderLine():
+    # def __init__(self,sku:Sku,quantity:int):
+        order_id: str
+        sku: Sku
+        quantity:int
+class Order():
+    def __init__(self,order_lines: List[OrderLine]):
+        self.order_id = None
+
 class Batch():
-    def __init__(self,quantiity,sku: Sku):
-        self.quantiity = quantiity 
+    def __init__(self,quantity,sku: Sku):
+        self.quantity = quantity 
         self.sku = sku
         self.reference_id = 1
-        self.order_lines: List[OrderLine]= []
+        self.order_lines: Set[OrderLine]= set()
+
     def allocate(self, order_line: OrderLine):
-        if self.quantiity >= order_line.quantiity:
-           self.quantiity -= order_line.quantiity
-           self.order_lines.append(order_line)
+        if self.can_allocate(order_line):
+           self.quantity -= order_line.quantity
+           self.order_lines.add(order_line)
            return True
-        return False
 
-class Order():
-    def __init__(self,order_lines: list=[OrderLine]):
-        self.reference_id = None
+    def deallocate(self,order_line):
+        if can_deallocate(order_line):
+            self.order_lines.remove(order_line)
+            self.quantity -= order_line.quantity
 
-class OrderLine():
-    def __init__(self,sku:Sku,quantity:int):
-        self.sku = sku
+    def can_deallocate(self,order_line):
+        return order_line in self.order_lines
 
-        pass
-class Sku():
-    def __init__():
-        self.reference_id=None
-        
-        pass
-
+    def can_allocate(self,order_line):
+        return self.quantity >= order_line.quantity and self.sku == order_line.sku
 class Warehouse():
+    def __init__(self):
+        pass
     pass

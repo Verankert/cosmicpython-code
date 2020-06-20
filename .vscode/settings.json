@@ -1,5 +1,11 @@
 {
-    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\envs\\tests\\python.exe",
+    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\envs\\cosmicpython\\python.exe",
     "python.linting.mypyEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
 }
